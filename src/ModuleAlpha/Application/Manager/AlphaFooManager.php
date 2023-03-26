@@ -11,12 +11,13 @@ class AlphaFooManager
 {
     public function __construct(
         private readonly EventStore $eventStore,
+        private readonly int $defaultParamAlpha,
     ) {
     }
 
     public function create(): void
     {
         // Foo created
-        $this->eventStore->store(new AlphaFooCreatedEvent());
+        $this->eventStore->store(new AlphaFooCreatedEvent($this->defaultParamAlpha));
     }
 }

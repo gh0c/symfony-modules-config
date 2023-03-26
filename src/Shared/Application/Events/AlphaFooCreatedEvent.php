@@ -8,5 +8,8 @@ use App\Shared\Application\EventStore\Event;
 
 class AlphaFooCreatedEvent implements Event
 {
-
+    public function __construct(
+        public readonly int $amount,
+    ) {
+    }
 }
