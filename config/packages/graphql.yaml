@@ -8,3 +8,13 @@ overblog_graphql:
                     type: yaml
                     dir: "%kernel.project_dir%/config/graphql/types"
                     suffix: null
+overblog_dataloader:
+    defaults:
+        promise_adapter: "overblog_dataloader.webonyx_graphql_sync_promise_adapter"
+    loaders:
+        alpha_foo:
+            alias: "alpha_foo_loader"
+            batch_load_fn: "@App\\ModuleAlpha\\Infrastructure\\GraphQL\\Resolver\\DataLoader\\AlphaFooLoader:load"
+        alpha_bar:
+            alias: "alpha_bar_loader"
+            batch_load_fn: "@App\\ModuleAlpha\\Infrastructure\\GraphQL\\Resolver\\DataLoader\\AlphaBarLoader:load"

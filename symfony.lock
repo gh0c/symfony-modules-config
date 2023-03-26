@@ -1,4 +1,7 @@
 {
+    "overblog/dataloader-bundle": {
+        "version": "v0.6.0"
+    },
     "overblog/graphql-bundle": {
         "version": "0.15",
         "recipe": {

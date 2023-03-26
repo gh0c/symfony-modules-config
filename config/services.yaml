@@ -10,15 +10,29 @@ services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind:
+            $defaultParamAlpha: 1
 
-    # makes classes in src/ available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
-    App\:
-        resource: '../src/'
+    app:
+        namespace: App\
+        resource: '%kernel.project_dir%/src/*'
         exclude:
-            - '../src/DependencyInjection/'
-            - '../src/Entity/'
-            - '../src/Kernel.php'
+            - '%kernel.project_dir%/src/**/Domain/{Model,Query,Command,WriteModel,ValueObject}'
+            - '%kernel.project_dir%/src/Kernel.php'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    App\ModuleAlpha\Infrastructure\GraphQL\Resolver\AlphaFooResolver:
+        arguments:
+            $dataLoader: '@alpha_foo_loader'
+    App\ModuleAlpha\Infrastructure\GraphQL\Resolver\AlphaBarResolver:
+        arguments:
+            $dataLoader: '@alpha_bar_loader'
+
+    App\ModuleBeta\Application\EventListener\AlphaFooEventListener:
+        tags:
+            - {
+                name: domain.event_listener,
+                event: 'App\Shared\Application\Events\AlphaFooCreatedEvent',
+                method: 'onAlphaFooCreated'
+            }
