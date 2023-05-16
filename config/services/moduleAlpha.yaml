@@ -1,0 +1,12 @@
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    App\ModuleAlpha\Infrastructure\GraphQL\Resolver\AlphaFooResolver:
+        arguments:
+            $dataLoader: '@alpha_foo_loader'
+    App\ModuleAlpha\Infrastructure\GraphQL\Resolver\AlphaBarResolver:
+        arguments:
+            $dataLoader: '@alpha_bar_loader'

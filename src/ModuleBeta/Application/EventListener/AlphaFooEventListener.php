@@ -10,6 +10,8 @@ class AlphaFooEventListener
 {
     public function onAlphaFooCreated(AlphaFooCreatedEvent $event): void
     {
+        $amount = $event->amount;
         // Do nothing
+        $justDoNothing = true;
     }
 }
